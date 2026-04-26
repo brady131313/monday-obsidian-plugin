@@ -1,0 +1,4 @@
+interface:
+  display_name: "Monday GraphQL API"
+  short_description: "Build with monday.com GraphQL and SDK"
+  default_prompt: "Use $monday-graphql-api to implement a typed monday.com GraphQL client with safe pagination and error handling."
