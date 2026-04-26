@@ -15,20 +15,20 @@ This plan is the implementation checklist for the read-only Monday.com to Obsidi
 
 ## Phase 1: Project foundation
 
-- [ ] Replace sample plugin naming and remove sample behaviors.
-  - [ ] Acceptance: `src/main.ts` no longer registers sample ribbon icons, sample modal commands, document click notices, sample intervals, or sample status text.
-  - [ ] Acceptance: plugin class and exported settings names use Monday sync domain naming.
-  - [ ] Acceptance: all required MVP commands are registered with stable IDs:
+- [x] Replace sample plugin naming and remove sample behaviors.
+  - [x] Acceptance: `src/main.ts` no longer registers sample ribbon icons, sample modal commands, document click notices, sample intervals, or sample status text.
+  - [x] Acceptance: plugin class and exported settings names use Monday sync domain naming.
+  - [x] Acceptance: all required MVP commands are registered with stable IDs:
     - `sync-configured-boards`
     - `validate-configuration`
     - `rebuild-monday-index`
     - `open-settings`
-  - [ ] Acceptance: `npm run build` passes after the sample code is removed.
+  - [x] Acceptance: `npm run build` passes after the sample code is removed.
 
-- [ ] Establish source module structure.
-  - [ ] Acceptance: feature logic is split out of `src/main.ts`.
-  - [ ] Acceptance: `src/main.ts` is limited to plugin lifecycle, settings load/save, command registration, and settings tab registration.
-  - [ ] Acceptance: modules exist for the planned architecture:
+- [x] Establish source module structure.
+  - [x] Acceptance: feature logic is split out of `src/main.ts`.
+  - [x] Acceptance: `src/main.ts` is limited to plugin lifecycle, settings load/save, command registration, and settings tab registration.
+  - [x] Acceptance: modules exist for the planned architecture:
     - `src/settings.ts`
     - `src/commands/index.ts`
     - `src/monday/client.ts`
@@ -42,30 +42,30 @@ This plan is the implementation checklist for the read-only Monday.com to Obsidi
     - `src/notes/link-renderer.ts`
     - `src/index/sync-index.ts`
     - `src/logger.ts`
-  - [ ] Acceptance: imports have no circular dependencies between high-level services.
+  - [x] Acceptance: imports have no circular dependencies between high-level services.
 
-- [ ] Add the automated test harness.
-  - [ ] Acceptance: package scripts include a test command.
-  - [ ] Acceptance: tests can run in Node without requiring a live Obsidian app for pure functions.
-  - [ ] Acceptance: Obsidian APIs used by service or repository tests can be mocked or wrapped.
-  - [ ] Acceptance: the initial test command passes with at least one smoke test.
+- [x] Add the automated test harness.
+  - [x] Acceptance: package scripts include a test command.
+  - [x] Acceptance: tests can run in Node without requiring a live Obsidian app for pure functions.
+  - [x] Acceptance: Obsidian APIs used by service or repository tests can be mocked or wrapped.
+  - [x] Acceptance: the initial test command passes with at least one smoke test.
 
-- [ ] Define core TypeScript types.
-  - [ ] Acceptance: `MondaySyncSettings` matches MVP settings from the spec.
-  - [ ] Acceptance: `MondayBoardConfig` includes `boardId`, optional name fields, `enabled`, and `assigneeColumnIds`.
-  - [ ] Acceptance: `MondaySyncItem` includes hierarchy, assignment, column, update, URL, and sync status fields.
-  - [ ] Acceptance: sync status is a strict union of `active`, `context`, `missing`, `archived`, `error`.
-  - [ ] Acceptance: column, update, board metadata, sync summary, and sync index record types are defined without using `any` for normalized plugin data.
+- [x] Define core TypeScript types.
+  - [x] Acceptance: `MondaySyncSettings` matches MVP settings from the spec.
+  - [x] Acceptance: `MondayBoardConfig` includes `boardId`, optional name fields, `enabled`, and `assigneeColumnIds`.
+  - [x] Acceptance: `MondaySyncItem` includes hierarchy, assignment, column, update, URL, and sync status fields.
+  - [x] Acceptance: sync status is a strict union of `active`, `context`, `missing`, `archived`, `error`.
+  - [x] Acceptance: column, update, board metadata, sync summary, and sync index record types are defined without using `any` for normalized plugin data.
 
-- [ ] Phase 1 automated validation.
-  - [ ] Acceptance: `npm run build` passes.
-  - [ ] Acceptance: the test command passes.
-  - [ ] Acceptance: TypeScript catches no unused imports left from the sample plugin.
-  - [ ] Acceptance: repository search confirms no sample command IDs or sample UI strings remain in `src/`.
+- [x] Phase 1 automated validation.
+  - [x] Acceptance: `npm run build` passes.
+  - [x] Acceptance: the test command passes.
+  - [x] Acceptance: TypeScript catches no unused imports left from the sample plugin.
+  - [x] Acceptance: repository search confirms no sample command IDs or sample UI strings remain in `src/`.
 
-- [ ] Phase 1 manual QA gate.
-  - [ ] Acceptance: user confirms the command palette shows only Monday Sync commands from this plugin.
-  - [ ] Acceptance: user confirms no sample ribbon icon, sample status text, click notice, or sample modal behavior appears after reloading the plugin.
+- [x] Phase 1 manual QA gate.
+  - [x] Acceptance: user confirms the command palette shows only Monday Sync commands from this plugin.
+  - [x] Acceptance: user confirms no sample ribbon icon, sample status text, click notice, or sample modal behavior appears after reloading the plugin.
 
 ## Phase 2: Settings and commands
 

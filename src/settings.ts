@@ -1,36 +1,49 @@
-import {App, PluginSettingTab, Setting} from "obsidian";
-import MyPlugin from "./main";
+import { App, PluginSettingTab, Setting } from "obsidian";
+import type MondaySyncPlugin from "./main";
+import { DEFAULT_SETTINGS } from "./settings-data";
+import type { MondayBoardConfig, MondaySyncSettings } from "./settings-data";
 
-export interface MyPluginSettings {
-	mySetting: string;
-}
+export { DEFAULT_SETTINGS };
+export type { MondayBoardConfig, MondaySyncSettings };
 
-export const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
-}
+export class MondaySyncSettingTab extends PluginSettingTab {
+	plugin: MondaySyncPlugin;
 
-export class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
-
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: MondaySyncPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
 
 	display(): void {
-		const {containerEl} = this;
-
+		const { containerEl } = this;
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Settings #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue(this.plugin.settings.mySetting)
-				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
-					await this.plugin.saveSettings();
-				}));
+			.setName("Monday API token")
+			// eslint-disable-next-line obsidianmd/ui/sentence-case
+			.setDesc("Used only to read configured Monday boards.")
+			.addText((text) =>
+				text
+					.setPlaceholder("Enter API token")
+					.setValue(this.plugin.settings.apiToken)
+					.onChange(async (value) => {
+						this.plugin.settings.apiToken = value;
+						await this.plugin.saveSettings();
+					}),
+			);
+
+		new Setting(containerEl)
+			.setName("Sync folder")
+			.setDesc("Markdown notes will be stored directly in this folder.")
+			.addText((text) =>
+				text
+					.setPlaceholder("Monday")
+					.setValue(this.plugin.settings.syncFolder)
+					.onChange(async (value) => {
+						this.plugin.settings.syncFolder =
+							value || DEFAULT_SETTINGS.syncFolder;
+						await this.plugin.saveSettings();
+					}),
+			);
 	}
 }
